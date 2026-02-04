@@ -1,0 +1,40 @@
+// ===========================================
+// SCSS Functions
+// ===========================================
+
+// Base font size for rem calculations
+$base-font-size: 16;
+
+// Viewport range for fluid typography
+$fluid-min-width: 375;
+$fluid-max-width: 1440;
+
+// Minimum font size floor (px)
+$fluid-font-floor: 14;
+
+// Simple px to rem conversion
+@function rem($px) {
+  @return ($px / $base-font-size) * 1rem;
+}
+
+// Fluid typography with clamp
+@function fluid-type($min-px, $max-px) {
+  // Enforce minimum floor
+  @if $min-px < $fluid-font-floor {
+    $min-px: $fluid-font-floor;
+  }
+  
+  // Convert to rem with units attached
+  $min-rem: ($min-px / $base-font-size) * 1rem;
+  $max-rem: ($max-px / $base-font-size) * 1rem;
+  
+  // Calculate slope and intercept
+  $slope: ($max-px - $min-px) / ($fluid-max-width - $fluid-min-width);
+  $intercept: $min-px - ($slope * $fluid-min-width);
+  
+  // Convert to units
+  $slope-vw: ($slope * 100) * 1vw;
+  $intercept-rem: ($intercept / $base-font-size) * 1rem;
+  
+  @return clamp(#{$min-rem}, #{$intercept-rem} + #{$slope-vw}, #{$max-rem});
+}
