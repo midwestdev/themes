@@ -11,7 +11,7 @@
 >
 > **Constants across all projects:**
 > - Text domain: `'midwestdev'` (used for WordPress i18n)
-> - Author: `Pellizzi & Company`
+> - Author: `Midwest Dev`
 >
 > Module examples (slick-carousel, slick-testimonials, slick-timeline) are project-specific references and may not exist in your theme.
 
@@ -63,8 +63,8 @@ Update the child theme's style.scss header with client information:
  *      Theme URI: https://www.[client-domain].com
  *      Version: 1.0
  *      Description: Custom Beaver Builder Child Theme built for [Client Name].
- *      Author: Pellizzi & Company
- *      Author URI: https://www.pellizziandcompany.com
+ *      Author: Midwest Dev
+ *      Author URI: https://www.midwestdev.io
  *      Template: bb-theme
  *
  *********************************************************************/
@@ -78,8 +78,8 @@ Update the child theme's style.scss header with client information:
  *      Theme URI: https://www.midwestdev.com
  *      Version: 1.0
  *      Description: Custom Beaver Builder Child Theme built for Midwest Dev.
- *      Author: Pellizzi & Company
- *      Author URI: https://www.pellizziandcompany.com
+ *      Author: Midwest Dev
+ *      Author URI: https://www.midwestdev.io
  *      Template: bb-theme
  *
  *********************************************************************/
@@ -114,7 +114,7 @@ Replace the generic "Beaver Builder Child Theme" header with client-specific inf
  * https://docs.wpbeaverbuilder.com/
  *
  * @version 1.0
- * @author Pellizzi & Company
+ * @author Midwest Dev
  */
 ```
 
@@ -674,8 +674,8 @@ The child theme's [style.scss](style.scss) (which compiles to style.css) must in
  *      Theme URI: https://www.clientwebsite.com
  *      Version: 1.0
  *      Description: Custom Beaver Builder Child Theme built for [Client Name].
- *      Author: Pellizzi & Company
- *      Author URI: https://www.pellizziandcompany.com
+ *      Author: Midwest Dev
+ *      Author URI: https://www.midwestdev.io
  *      Template: bb-theme
  *
  *********************************************************************/
