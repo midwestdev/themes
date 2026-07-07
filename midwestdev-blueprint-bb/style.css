@@ -30,3 +30,29 @@ img, picture, svg, video {
   display: block;
   max-width: 100%;
 }
+
+:root {
+  --header-height: 120px;
+}
+
+@media screen and (min-width: 768px) {
+  html:not(.fl-builder-edit) header.fl-builder-content {
+    position: sticky !important;
+    top: 0;
+    z-index: 1000 !important;
+    transform: none !important;
+    min-height: var(--header-height);
+    pointer-events: none;
+  }
+  html:not(.fl-builder-edit) header.fl-builder-content > .fl-row {
+    pointer-events: auto;
+  }
+  html:not(.fl-builder-edit) header.fl-builder-content .fl-module-photo img {
+    transition: all 0.3s ease-in-out;
+  }
+  html:not(.fl-builder-edit) .fl-page {
+    padding-top: 0 !important;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,57 @@
+// ===========================================
+// Sticky BB header — no page-length jump on logo shrink
+// PERMANENT pattern for BB child themes (blueprint default).
+//
+// Beaver Builder's (Themer) header ships as position:fixed. Fixed is out of
+// flow, so BB pads .fl-page by the header height to compensate; when the logo
+// shrinks on scroll, the header height — and therefore that padding —
+// recalculates, and the whole page LENGTH jumps.
+//
+// Fix (three parts, all required):
+//   1. position:sticky (+ transform:none) — the header keeps its own space in
+//      normal flow, so no compensating padding is needed and nothing reflows as
+//      the logo scales.
+//   2. min-height locked to the header's ON-LOAD height (--header-height, set
+//      per theme below) so a shrinking logo can never change the reserved
+//      height / page length.
+//   3. pointer-events:none on the header container + auto on its immediate
+//      child row — clicks fall THROUGH any reserved-but-empty header space onto
+//      the content it is sticky over, while the header bar stays clickable.
+//
+// Scoped to html:not(.fl-builder-edit) so the BB editor keeps working, and to
+// >=768px (mobile headers behave differently). Selector targets the BB Themer
+// header (header.fl-builder-content, immediate child > .fl-row). For a CLASSIC
+// bb-theme header, swap for .fl-page-header and its child wrap.
+// ===========================================
+
+:root {
+    // MEASURE the primary header's on-load height and set it per theme.
+    --header-height: 120px;
+}
+
+html:not(.fl-builder-edit) {
+    @media screen and (min-width: 768px) {
+        header.fl-builder-content {
+            position: sticky !important;
+            top: 0;
+            z-index: 1000 !important;
+            transform: none !important;              // cancel BB's fixed-header transform
+            min-height: var(--header-height);        // hold on-load height => no page jump
+            pointer-events: none;                    // reserved space is click-through...
+
+            > .fl-row {
+                pointer-events: auto;                // ...the header bar itself stays interactive
+            }
+
+            // Smooth the logo scale when BB shrinks the sticky header.
+            .fl-module-photo img {
+                transition: all 0.3s ease-in-out;
+            }
+        }
+
+        // Sticky lives in flow, so drop BB's fixed-header offset padding.
+        .fl-page {
+            padding-top: 0 !important;
+        }
+    }
+}

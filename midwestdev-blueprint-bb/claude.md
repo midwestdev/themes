@@ -791,7 +791,30 @@ Every `.scss` file compiles to 4 files:
 @import 'assets/scss/functions';
 @import 'assets/scss/variables';
 @import 'assets/scss/reset';
+@import 'assets/scss/header';
 ```
+
+### Sticky BB header (`_header.scss`) — standard fix, ships with the blueprint
+
+Beaver Builder's (Themer) header is `position:fixed`, which is out of flow, so
+BB pads `.fl-page` by the header height. When the logo **shrinks on scroll**,
+that padding recalculates and the **page length jumps**. `_header.scss` fixes it
+and is included in every child theme by default:
+
+1. `position:sticky !important` + `transform:none !important` — header keeps its
+   own space in flow; no compensating padding, no reflow when the logo scales.
+2. `min-height: var(--header-height)` — locks the header to its **on-load**
+   height so a shrinking logo can't change the page length. **Set
+   `--header-height` (top of `_header.scss`) to the site's measured header
+   height.**
+3. `pointer-events:none` on `header.fl-builder-content` + `auto` on `> .fl-row`
+   — clicks fall through reserved-but-empty header space onto the content the
+   header is sticky over, while the header bar stays clickable.
+
+Scoped `html:not(.fl-builder-edit)` (editor keeps working) + `min-width:768px`.
+Selector targets the **BB Themer** header (`header.fl-builder-content`); for a
+**classic** bb-theme header swap to `.fl-page-header` + its child wrap. If the
+sticky doesn't take, inspect the `<header>` class to confirm the header type.
 
 ### SCSS Functions & Mixins
 
